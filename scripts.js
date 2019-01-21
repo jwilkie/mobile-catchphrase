@@ -72,7 +72,7 @@ let app = (function(){
             audioTick.timeBetween = 100;
         }, Math.floor(Math.random() * (gameTime / 4)  + (gameTime / 2)));
 
-        document.getElementById('wordDisplay').innerText = randomWord();
+        document.getElementById('wordDisplay').value = randomWord();
     };
 
     return {
@@ -86,7 +86,7 @@ let app = (function(){
                 startGame();
             }
             else if(state == GameState.RUNNING){
-                document.getElementById('wordDisplay').innerText = randomWord();
+                document.getElementById('wordDisplay').value = randomWord();
             }
         },
         add: function(team){

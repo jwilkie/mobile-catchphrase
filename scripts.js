@@ -72,8 +72,6 @@ let app = (function(){
             audioTick.timeBetween = 100;
         }, Math.floor(Math.random() * (gameTime / 4)  + (gameTime / 2)));
 
-        document.getElementById('btnStart').disabled = true;
-        document.getElementById('btnNext').disabled = false;
         document.getElementById('displayWord').innerText = randomWord();
     };
 
@@ -81,7 +79,7 @@ let app = (function(){
         load: function(){
             getWords();
             getSound();
-            document.getElementById('btnStart').disabled = false;
+            document.getElementById('btnNext').disabled = false;
         },
         click: function(){
             if(state == GameState.STOPPED){
@@ -99,7 +97,7 @@ let app = (function(){
             points[team]++;
             state = GameState.STOPPED;
 
-            document.getElementById('btnStart').disabled = false;
+            document.getElementById('btnNext').disabled = false;
             let scoreList = document.querySelectorAll('.teamScore');
             scoreList[team].innerText = points[i];
         }

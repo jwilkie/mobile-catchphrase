@@ -81,6 +81,7 @@ let app = (function(){
         load: function(){
             getWords();
             getSound();
+            document.getElementById('btnStart').disabled = false;
         },
         click: function(){
             if(state == GameState.STOPPED){

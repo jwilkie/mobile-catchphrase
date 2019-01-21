@@ -30,7 +30,7 @@ let app = (function(){
         audioTick = new Audio('./tick.mp3');
         audioTick.timeBetween = 900;
         audioTick.onended = function(){
-            if(!running){
+            if(state != GameState.RUNNING){
                 return;
             }
 

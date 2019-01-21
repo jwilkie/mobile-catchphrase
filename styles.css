@@ -1,0 +1,71 @@
+html {
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+html, body, main {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+#panelStart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btnStart {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+}
+
+#panelGame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#panelGame > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 10px;
+}
+
+#displayScore {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#displayScore > div {
+    padding: 10px 15px;
+    background-color: gray;
+    border: 3px solid black;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#displayWord {
+    width: 100%;
+    padding: 20px 30px;
+    margin: 20px 0;
+    background-color: gray;
+    border: 5px solid black;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#btnNext {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+}

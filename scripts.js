@@ -1,7 +1,13 @@
 let app = (function(){
+    let GameState = Object.freeze({
+        "STOPPED": 0, 
+        "RUNNING": 1, 
+        "POINTS":2
+    });
+
+    let state = GameState.STOPPED;
     let words = [];
     let points = [0, 0];
-    let running = false;
     let gameTime = 0;
     let audioTick;
     let audioRing;
@@ -44,7 +50,7 @@ let app = (function(){
         audioTick.currentTime = 0;
         audioRing.play();
 
-        running = false;
+        state = GameState.POINTS;
 
         document.getElementById('btnNext').disabled = true;
         let btnList = document.querySelectorAll('.btnAdd');
@@ -53,51 +59,48 @@ let app = (function(){
         }
     };
 
-    let loadGame = function(){
-        getWords();
-        getSound();
-    };
-
     let startGame = function(){
-        running = true;
         gameTime = Math.floor(Math.random() * 15 + 15) * 1000;
-
         setTimeout(function(){
             endGame();
         }, gameTime);
-
-        document.getElementById('btnStart').disabled = true;
-        document.getElementById('btnNext').disabled = false;
-        document.getElementById('displayWord').innerText = randomWord();
+        state = GameState.RUNNING;
 
         audioTick.timeBetween = 900;
         audioTick.play();
         setTimeout(function(){
             audioTick.timeBetween = 100;
         }, Math.floor(Math.random() * (gameTime / 4)  + (gameTime / 2)));
-    };
 
-    let nextWord = function(){
+        document.getElementById('btnStart').disabled = true;
+        document.getElementById('btnNext').disabled = false;
         document.getElementById('displayWord').innerText = randomWord();
     };
 
-    let addPoint = function(team){
-        points[team]++;
-        document.getElementById('btnStart').disabled = false;
-        let scoreList = document.querySelectorAll('.teamScore');
-        for (let i = 0 ; i < scoreList.length ; i++) {
-            scoreList[i].innerText = points[i];
-        }
-        let btnList = document.querySelectorAll('.btnAdd');
-        for (let btn of btnList) {
-            btn.disabled = true;
-        }
-    };
-
     return {
-        load: loadGame,
-        start: startGame,
-        next: nextWord,
-        add: addPoint
+        load: function(){
+            getWords();
+            getSound();
+        },
+        click: function(){
+            if(state == GameState.STOPPED){
+                startGame();
+            }
+            else if(state == GameState.RUNNING){
+                document.getElementById('displayWord').innerText = randomWord();
+            }
+        },
+        add: function(team){
+            if(state != GameState.STOPPED){
+                return;
+            }
+
+            points[team]++;
+            state = GameState.STOPPED;
+
+            document.getElementById('btnStart').disabled = false;
+            let scoreList = document.querySelectorAll('.teamScore');
+            scoreList[team].innerText = points[i];
+        }
     }
 }());

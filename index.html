@@ -15,11 +15,11 @@
     <main>
         <div class="graphicScore">
             <div id="scoreDisplay">
-                <div>
+                <div onclick="add(0)">
                     <div class="teamName">Team 1</div>
                     <div class="teamScore">0</div>
                 </div>
-                <div>
+                <div onclick="add(1)">
                     <div class="teamName">Team 2</div>
                     <div class="teamScore">0</div>
                 </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="wordButton">
             <input id="wordDisplay" type="text" value="" readonly />
-            <button id="btnNext" onclick="app.next()" disabled>Next</button>
+            <button id="btnNext" onclick="app.click()" disabled>Next</button>
         </div>
     </main>
 

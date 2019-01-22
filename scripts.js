@@ -120,7 +120,7 @@ let app = (function(){
             }
         },
         add: function(team){
-            if(state != GameState.STOPPED){
+            if(state != GameState.POINTS){
                 return;
             }
 

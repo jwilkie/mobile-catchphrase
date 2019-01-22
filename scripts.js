@@ -11,6 +11,13 @@ let app = (function(){
     let gameTime = 0;
     let audioTick;
     let audioRing;
+
+    let buttonNext;
+    let buttonTeam1;
+    let buttonTeam2;
+    let labelTeam1;
+    let labelTeam2;
+    let labelWord;
     
     let getWords = function(){
         let request = new XMLHttpRequest();
@@ -46,17 +53,13 @@ let app = (function(){
     };
 
     let endGame = function(){
+        state = GameState.POINTS;
+
+        updateUI();
+
         audioTick.pause();
         audioTick.currentTime = 0;
         audioRing.play();
-
-        state = GameState.POINTS;
-
-        document.getElementById('btnNext').disabled = true;
-        let btnList = document.querySelectorAll('.btnAdd');
-        for (let btn of btnList) {
-            btn.disabled = false;
-        }
     };
 
     let startGame = function(){
@@ -71,22 +74,47 @@ let app = (function(){
         setTimeout(function(){
             audioTick.timeBetween = 100;
         }, Math.floor(Math.random() * (gameTime / 4)  + (gameTime / 2)));
+    };
 
-        document.getElementById('wordDisplay').value = randomWord();
+    let updateUI = function(){
+        if(state == GameState.STOPPED){
+            buttonNext.innerText = "Démarrer";
+            buttonNext.disabled = false;
+        }
+        else if(state == GameState.RUNNING){
+            buttonNext.innerText = "Prochain";
+            buttonNext.disabled = false;
+        }
+        else if(state == GameState.POINTS){
+            buttonNext.innerText = "Démarrer";
+            buttonNext.disabled = true;
+        }
+
+        labelTeam1.innerText = points[0];
+        labelTeam2.innerText = points[1];
     };
 
     return {
         load: function(){
             getWords();
             getSound();
-            document.getElementById('btnNext').disabled = false;
+
+            buttonNext = document.getElementById("btnNext");
+            buttonTeam1 = document.querySelector("#scoreDisplay > :first-child");
+            buttonTeam2 = document.querySelector("#scoreDisplay > :last-child");
+            labelTeam1 = document.querySelector("#scoreDisplay > :first-child .teamScore");
+            labelTeam2 = document.querySelector("#scoreDisplay > :last-child .teamScore");
+            labelWord = document.getElementById("wordDisplay");
+
+            updateUI();
         },
         click: function(){
             if(state == GameState.STOPPED){
                 startGame();
+                this.click();
             }
             else if(state == GameState.RUNNING){
-                document.getElementById('wordDisplay').value = randomWord();
+                labelWord.value = randomWord();
             }
         },
         add: function(team){
@@ -94,12 +122,10 @@ let app = (function(){
                 return;
             }
 
-            points[team]++;
             state = GameState.STOPPED;
-
-            document.getElementById('btnNext').disabled = false;
-            let scoreList = document.querySelectorAll('.teamScore');
-            scoreList[team].innerText = points[i];
+            points[team]++;
+            
+            updateUI();
         }
     }
 }());

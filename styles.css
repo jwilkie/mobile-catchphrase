@@ -87,11 +87,11 @@ main > div {
     margin-bottom: .5rem;
 }
 
-@media only screen and (min-width: 38em) {
+@media only screen and (orientation: landscape) {
     main {
         flex-direction: row;
-        max-width: 800px;
-        max-height: 350px;
+        max-width: 1200px;
+        max-height: 450px;
         position: absolute;
         top:0;
         bottom: 0;

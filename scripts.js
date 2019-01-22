@@ -5,7 +5,7 @@ let app = (function(){
         "POINTS":2
     });
     const MAX_TIME = 90;
-    const MIN_TIME = 60
+    const MIN_TIME = 60;
 
     let state = GameState.STOPPED;
     let words = [];

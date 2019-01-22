@@ -4,6 +4,8 @@ let app = (function(){
         "RUNNING": 1, 
         "POINTS":2
     });
+    const MAX_TIME = 90;
+    const MIN_TIME = 60
 
     let state = GameState.STOPPED;
     let words = [];
@@ -13,8 +15,6 @@ let app = (function(){
     let audioRing;
 
     let buttonNext;
-    let buttonTeam1;
-    let buttonTeam2;
     let labelTeam1;
     let labelTeam2;
     let labelWord;
@@ -63,7 +63,9 @@ let app = (function(){
     };
 
     let startGame = function(){
-        gameTime = Math.floor(Math.random() * 15 + 15) * 1000;
+        gameTime = Math.floor(
+            Math.random() * (MAX_TIME - MIN_TIME + 1) + MIN_TIME
+        ) * 1000;
         setTimeout(function(){
             endGame();
         }, gameTime);

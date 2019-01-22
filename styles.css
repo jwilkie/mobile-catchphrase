@@ -51,6 +51,7 @@ main > div {
     border: solid 1px #ced4da;
     border-radius: .25rem;
     font-size: 8vw;
+    text-align: center;
     color: #495057;
 }
 

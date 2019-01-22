@@ -69,6 +69,8 @@ let app = (function(){
         }, gameTime);
         state = GameState.RUNNING;
 
+        updateUI();
+
         audioTick.timeBetween = 900;
         audioTick.play();
         setTimeout(function(){
@@ -124,7 +126,7 @@ let app = (function(){
 
             state = GameState.STOPPED;
             points[team]++;
-            
+
             updateUI();
         }
     }

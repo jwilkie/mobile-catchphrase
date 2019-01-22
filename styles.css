@@ -43,14 +43,15 @@ main > div {
 }
 
 #wordDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-grow: 1;
     margin-bottom: .5rem;
     border: solid 1px #ced4da;
     border-radius: .25rem;
-    font-size: 2.5rem;
-    text-align: center;
+    font-size: 8vw;
     color: #495057;
-    resize: none;
 }
 
 #btnNext {
@@ -99,18 +100,28 @@ main > div {
     }
 
     .graphicScore {
-        width: 50%;
+        width: 40%;
         flex-grow: 1;
         margin-right: .25rem;
     }
 
     .wordButton {
-        width: 50%;
+        width: 60%;
         flex-grow: 1;
         margin-left: .25rem;
     }
 
-    main #graphicDisplay {
+    #wordDisplay {
+        font-size: 4.2vw;
+    }
+
+    #graphicDisplay {
         display: block;
+    }
+}
+
+@media only screen and (min-width: 60em) {
+    #wordDisplay {
+        font-size: 2.5rem;
     }
 }

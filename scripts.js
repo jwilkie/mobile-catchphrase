@@ -116,7 +116,7 @@ let app = (function(){
                 this.click();
             }
             else if(state == GameState.RUNNING){
-                labelWord.value = randomWord();
+                labelWord.innerText = randomWord();
             }
         },
         add: function(team){
